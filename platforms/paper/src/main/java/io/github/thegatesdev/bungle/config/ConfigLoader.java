@@ -29,15 +29,20 @@ public final class ConfigLoader {
         activeConfig = CompletableFuture.supplyAsync(this::loadNow);
     }
 
-    public void save() throws ConfigurateException {
-        final var newNode = loader.createNode(value -> value.set(BungleConfig.class, activeConfig));
-        loader.save(newNode);
+    public void save() {
+        try {
+            var node = loader.createNode(value -> value.set(BungleConfig.class, activeConfig.get()));
+            loader.save(node);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not save config file", e);
+        }
     }
 
 
     private BungleConfig loadNow() {
         if (Files.notExists(configPath)) {
             try {
+                Files.createDirectories(configPath.getParent());
                 Files.createFile(configPath);
             } catch (IOException e) {
                 throw new RuntimeException("Could not create config file", e);
