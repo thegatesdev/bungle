@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.paper.run)
     alias(libs.plugins.paper.gen)
     alias(libs.plugins.paper.userdev)
+    alias(libs.plugins.shadow)
 }
 
 repositories {

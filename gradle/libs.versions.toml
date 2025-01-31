@@ -5,6 +5,7 @@ paper-run = "2.3.1"
 paper-gen= "1.2.0"
 paper-userdev = "2.0.0-beta.14"
 configurate-hocon = "4.1.2"
+shadow = "9.0.0-beta6"
 
 [libraries.paper-api]
 module = "io.papermc.paper:paper-api"
@@ -22,3 +23,6 @@ version.ref = "paper-gen"
 [plugins.paper-userdev]
 id = "io.papermc.paperweight.userdev"
 version.ref = "paper-userdev"
+[plugins.shadow]
+id = "com.gradleup.shadow"
+version.ref = "shadow"
