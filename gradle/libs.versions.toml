@@ -1,12 +1,13 @@
 [versions]
 minecraft = "1.21.4"
-paper = "1.21.4-R0.1-SNAPSHOT"
+paper-api = "1.21.4-R0.1-SNAPSHOT"
 paper-run = "2.3.1"
 paper-gen= "1.2.0"
+paper-userdev = "2.0.0-beta.14"
 
 [libraries.paper-api]
 module = "io.papermc.paper:paper-api"
-version.ref = "paper"
+version.ref = "paper-api"
 
 [plugins.paper-run]
 id = "xyz.jpenilla.run-paper"
@@ -14,3 +15,6 @@ version.ref = "paper-run"
 [plugins.paper-gen]
 id = "xyz.jpenilla.resource-factory-paper-convention"
 version.ref = "paper-gen"
+[plugins.paper-userdev]
+id = "io.papermc.paperweight.userdev"
+version.ref = "paper-userdev"

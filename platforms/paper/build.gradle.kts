@@ -2,6 +2,7 @@ plugins {
     id("bungle.java-conventions")
     alias(libs.plugins.paper.run)
     alias(libs.plugins.paper.gen)
+    alias(libs.plugins.paper.userdev)
 }
 
 repositories {
@@ -11,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.paper.api)
+    paperweight.paperDevBundle(libs.versions.paper.api)
 }
 
 tasks {
@@ -27,5 +28,5 @@ paperPluginYaml {
     website = "https://github.com/thegatesdev/bungle"
     version = project.version.toString()
     apiVersion = libs.versions.minecraft
-    main = "${project.group}.Bungle"
+    main = "${project.group}.bungle.Bungle"
 }
