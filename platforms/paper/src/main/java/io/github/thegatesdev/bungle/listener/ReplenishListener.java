@@ -1,6 +1,8 @@
 package io.github.thegatesdev.bungle.listener;
 
+import io.github.thegatesdev.bungle.config.*;
 import io.github.thegatesdev.bungle.event.*;
+import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.block.*;
@@ -8,17 +10,22 @@ import org.bukkit.inventory.*;
 
 import java.util.*;
 
-public final class ListenerReplenish implements Listener {
+public final class ReplenishListener implements Listener {
 
-    public static final char REPLENISH_THRESHOLD = 50;
+    private static final EnumSet<GameMode> ENABLED_GAME_MODES = EnumSet.of(GameMode.ADVENTURE, GameMode.SURVIVAL);
+    private ReplenishConfig config = new ReplenishConfig();
 
+    public void setConfig(ReplenishConfig config) {
+        this.config = config;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void handleBlockPlace(BlockPlaceEvent event) {
-        if (!event.canBuild()) return;
-        ItemStack usedItem = event.getItemInHand();
-        if (usedItem.getAmount() > REPLENISH_THRESHOLD) return;
+        if (!config.enabled || !event.canBuild()) return;
         Player player = event.getPlayer();
+        if (!ENABLED_GAME_MODES.contains(player.getGameMode())) return;
+        ItemStack usedItem = event.getItemInHand();
+        if (usedItem.getAmount() > config.replenishThreshold) return;
         PlayerInventory inventory = player.getInventory();
         ListIterator<ItemStack> contents = inventory.iterator();
 

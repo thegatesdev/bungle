@@ -6,6 +6,7 @@ plugins {
 }
 
 repositories {
+    mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc"
     }
@@ -13,6 +14,7 @@ repositories {
 
 dependencies {
     paperweight.paperDevBundle(libs.versions.paper.api)
+    implementation(libs.configurate.hocon)
 }
 
 tasks {
