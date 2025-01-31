@@ -30,6 +30,9 @@ public final class Bungle extends JavaPlugin {
             logger.warn(Component.text("The plugin will now be disabled!"));
             getServer().getPluginManager().disablePlugin(this);
             return null;
+        }).thenRun(configLoader::save).exceptionally(throwable -> {
+            logger.error(Component.text(throwable.toString()));
+            return null;
         });
     }
 
